@@ -81,3 +81,10 @@ group :production do
 end
 
 gem 'devise'
+gem 'active_hash'
+gem 'mini_magick'
+gem 'image_processing'
+gem 'activestorage'
+gem 'pry-rails'
+gem 'pry'
+
