@@ -53,7 +53,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "・・・カテゴリーの情報は1以外でないと登録できない" do
-          @item.category_id = ""
+          @item.category_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Category カテゴリーを選択してください")
           end
@@ -65,7 +65,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "・・・商品の状態の情報は1以外でないと登録できない" do
-          @item.item_condition_id = ""
+          @item.item_condition_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Item condition 商品の状態を選択してください")
           end
@@ -78,7 +78,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "・・・配送料の負担の情報は1以外でないと登録できない" do
-          @item.shipping_cost_id = ""
+          @item.shipping_cost_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Shipping cost 配送料の負担を選択してください")
           end
@@ -91,7 +91,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "・・・発送元の地域の情報は1以外でないと登録できない" do
-          @item.shipping_origin_id = ""
+          @item.shipping_origin_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Shipping origin 発送元の地域を選択してください")
           end
@@ -103,7 +103,7 @@ RSpec.describe Item, type: :model do
         end
 
         it "・・・発送までの日数は1以外でないと登録できない" do
-          @item.days_to_ship_id = ""
+          @item.days_to_ship_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Days to ship 発送までの日数を選択してください")
           end
