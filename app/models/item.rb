@@ -12,8 +12,8 @@ class Item < ApplicationRecord
   belongs_to :days_to_ship
 
   validates :category_id, :item_condition_id, :shipping_cost_id, :shipping_origin_id, :days_to_ship_id, presence: true, numericality: { other_than: 1 }
-  validates :item_name, :item_description, presence: true
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+  validates :item_name, presence: true, length: { maximum: 40 }
+  validates :item_description, presence: true, length: { maximum: 1000 }
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 999999 }
   validates :image, presence: true
-  validates :item_description, presence: true
 end
