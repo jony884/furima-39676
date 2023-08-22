@@ -44,8 +44,11 @@ class Item < ApplicationRecord
             numericality: { 
               greater_than_or_equal_to: 300, 
               less_than_or_equal_to: 999999, 
-              message: "価格は300以上999999以下で設定してください" 
+              message: "価格は300以上999999以下で設定してください",
+              only_integer: true,
+              message: "価格は半角数字のみで入力してください"
             }
+
 
   validates :image, presence: { message: "商品画像を選択してください" }
 
