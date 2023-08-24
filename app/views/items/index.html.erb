@@ -119,12 +119,16 @@
     </div>
     <ul class='item-lists'>
 
-        <% if @items.present? %>
+      <% if @items.present? %>
         <% @items.each do |item| %>
         <li class='list'>
-        <%= link_to item_path(item) do %>
+      <%= link_to item_path(item) do %>
         <div class='item-img-content'>
-          <%= image_tag item.image, class: "item-img" %>
+        <% if item.image.attached? %>
+        <%= image_tag item.image, class: "item-img" %>
+      <% else %>
+        <%= image_tag "default_image.png", class: "item-img" %>
+      <% end %>
 
           <%# 商品が売れていればsold outを表示しましょう %>
           <%# <% if item.buy.present? %>
