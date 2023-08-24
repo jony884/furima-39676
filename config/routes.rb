@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'items#index'
   post '/users', to: 'devise/registrations#create'
 
-  resources :items, only: [:new, :create, :update, :edit, :update, :show] do
+  resources :items, only: [:new, :create, :update, :edit, :update, :show, :destroy] do
     
   end
 end
