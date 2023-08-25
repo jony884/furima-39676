@@ -39,7 +39,7 @@
 - belongs_to :user
 - has_one :buy
 
-## sends テーブル
+## addresses テーブル
 
 | Column             | Type    | Options                         |
 | -------------------| --------| --------------------------------|
@@ -55,7 +55,7 @@
 
 - belongs_to :buy
 
-## buys テーブル
+## orders テーブル
 
 | Column             | Type       | Options                         |
 | ------------------ | -----------| ------------------------------- |
