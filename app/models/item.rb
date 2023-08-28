@@ -2,6 +2,7 @@ class Item < ApplicationRecord
   
   has_one_attached :image
   belongs_to :user
+  has_many :orders
   
   extend ActiveHash::Associations::ActiveRecordExtensions
 
@@ -52,4 +53,7 @@ class Item < ApplicationRecord
 
   validates :image, presence: { message: "商品画像を選択してください" }
 
+  def sold_out?
+    orders.present?
+  end
 end

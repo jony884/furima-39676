@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   post '/users', to: 'devise/registrations#create'
 
   resources :items, only: [:new, :create, :update, :edit, :update, :show, :destroy] do
-    
+    resources :orders, only: [:index, :create]
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_19_040721) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_24_124723) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,12 +39,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_040721) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "articles", charset: "utf8", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "text", null: false
-    t.integer "genre_id", null: false
+  create_table "addresses", charset: "utf8", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.string "postal_code", null: false
+    t.integer "shipping_origin_id", null: false
+    t.string "city", null: false
+    t.string "street_address", null: false
+    t.string "building_address"
+    t.string "phone_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_addresses_on_order_id"
   end
 
   create_table "items", charset: "utf8", force: :cascade do |t|
@@ -60,6 +65,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_040721) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "orders", charset: "utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_orders_on_item_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -82,5 +96,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_040721) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "orders"
   add_foreign_key "items", "users"
+  add_foreign_key "orders", "items"
+  add_foreign_key "orders", "users"
 end
