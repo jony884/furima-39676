@@ -1,16 +1,18 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  
-  def index
-    @item = Item.find(params[:item_id])
+  before_action :set_item, only: [:index, :create]
 
+  def index
     if @item.sold_out?
       redirect_to root_path, alert: "売却済みの商品は購入できません。"
+    elsif @item.user == current_user
+      redirect_to root_path, alert: "出品者は自分の出品した商品を購入できません。"
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
       @order_form = OrderForm.new
     end
   end
+  
 
   def create
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -21,12 +23,15 @@ class OrdersController < ApplicationController
       @order_form.save(params,current_user.id)
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index, status: :unprocessable_entity
     end
   end
       
   private
+    def set_item
+      @item = Item.find(params[:item_id])
+    end
+
     def order_params
       params.require(:order_form).permit(:postal_code, :shipping_origin_id, :city, :street_address, :building_address, :phone_number).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:token])
     end
