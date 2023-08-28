@@ -1,8 +1,15 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @item = Item.find(params[:item_id])
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @order_form = OrderForm.new
+
+    if @item.sold_out?
+      redirect_to root_path, alert: "売却済みの商品は購入できません。"
+    else
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      @order_form = OrderForm.new
+    end
   end
 
   def create
