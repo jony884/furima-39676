@@ -10,6 +10,9 @@ RSpec.describe OrderForm, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_form).to be_valid
       end
+      it "priceとtokenがあれば保存ができること" do
+        expect(@order_form).to be_valid
+        end
       it 'user_idが空でなければ保存できる' do
         @order_form.user_id = 1
         expect(@order_form).to be_valid
@@ -50,6 +53,11 @@ RSpec.describe OrderForm, type: :model do
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("User can't be blank")
       end
+      # it "priceが空では保存ができないこと" do
+      #   @order.price = nil
+      #   @order.valid?
+      #   expect(@order_form.errors.full_messages).to include("Price can't be blank")
+      # end
       it 'item_idが空だと保存できない' do
         @order_form.item_id = nil
         @order_form.valid?

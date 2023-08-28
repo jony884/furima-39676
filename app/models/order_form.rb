@@ -10,6 +10,7 @@ class OrderForm
     validates :city
     validates :street_address
     validates :phone_number, format: { with: /\A\d{10,11}\z/,message: "is invalid. Include hyphen(-)"}
+    validates :token, presence: true
   end
 
   def save(params,user_id)

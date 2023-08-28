@@ -87,4 +87,5 @@ gem 'image_processing'
 gem 'activestorage'
 gem 'pry-rails'
 gem 'pry'
-
+gem 'payjp'
+gem 'gon'
