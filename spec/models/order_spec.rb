@@ -73,7 +73,7 @@ RSpec.describe OrderForm, type: :model do
       it '都道府県が「---」だと保存できないこと' do
         @order_form.shipping_origin_id = 0
         @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Shipping origin can't be blank")
+        expect(@order_form.errors.full_messages).to include("Shipping origin is invalid")
       end
       it '都道府県が空だと保存できないこと' do
         @order_form.shipping_origin_id = nil

@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'automatic_calculation' %>
+
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
@@ -5,7 +7,7 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with model: @item, url: items_path, local: true do |f| %>
+    <%= form_with model: @item, url: items_path, data: {tarbo: false}, local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
@@ -136,23 +138,6 @@
     </div>
   </div>
   <% end %>
-
-  <script>
-  const priceInput = document.getElementById('item-price');
-  const addTaxPrice = document.getElementById('add-tax-price');
-  const profit = document.getElementById('profit');
-  
-  priceInput.addEventListener('input', () => {
-    const price = parseInt(priceInput.value, 10);
-    
-    const tax = Math.floor(price * 0.1);
-    
-    const profitAmount = price - tax;
-    
-    addTaxPrice.textContent = tax.toLocaleString();
-    profit.textContent = profitAmount.toLocaleString();
-  });
-</script>
 
   <footer class="items-sell-footer">
     <ul class="menu">

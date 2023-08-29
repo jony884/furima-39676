@@ -1,5 +1,7 @@
 <%# cssは商品出品のものを併用しています。
 app/assets/stylesheets/items/new.css %>
+<%= javascript_include_tag 'automatic_calculation' %>
+
 
 <div class="items-sell-contents">
   <header class="items-sell-header">
@@ -145,23 +147,6 @@ app/assets/stylesheets/items/new.css %>
     <%# /下部ボタン %>
   </div>
   <% end %>
-
-  <script>
-  const priceInput = document.getElementById('item-price');
-  const addTaxPrice = document.getElementById('add-tax-price');
-  const profit = document.getElementById('profit');
-  
-  priceInput.addEventListener('input', () => {
-    const price = parseInt(priceInput.value, 10);
-    
-    const tax = Math.floor(price * 0.1);
-    
-    const profitAmount = price - tax;
-    
-    addTaxPrice.textContent = tax.toLocaleString();
-    profit.textContent = profitAmount.toLocaleString();
-  });
-</script>
 
   <footer class="items-sell-footer">
     <ul class="menu">
